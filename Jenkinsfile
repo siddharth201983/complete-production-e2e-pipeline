@@ -6,36 +6,28 @@ pipeline{
         jdk 'Java17'
         maven 'Maven3'
     }
-    stages("Clean Workspace"){
-        stage{
+    stages{
+        stage("Clean Workspace"){
             steps{
                 cleanWs()
             }
         }
-    }
-    stages("Checkout from SCM"){
-        stage{
+        stage("Checkout from SCM"){
             steps{
-            git branch: 'main', credentialsId: 'gitcred', url:"https://github.com/siddharth201983/complete-production-e2e-pipeline.git"  
+                git branch: 'main', credentialsId: 'gitcred', url:"https://github.com/siddharth201983/complete-production-e2e-pipeline.git"  
             }
         }
-    }
-    stages("Create Build"){
-        stage{
+        stage("Create Build"){
             steps{
                  
             }
         }
-    }
-    stages("Push Image"){
-        stage{
+        stage("Push Image"){
             steps{
                  
             }
         }
-    }
-    stages("Deployment"){
-        stage{
+        stage("Deployment"){
             steps{
                  
             }
