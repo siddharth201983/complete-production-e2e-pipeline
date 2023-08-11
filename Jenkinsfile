@@ -41,17 +41,6 @@ pipeline{
                 script{
                     waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'
                 }
-              }
-            }
-        }
-        stage("Push Image"){
-            steps{
-                echo "Push Image"
-            }
-        }
-        stage("Deployment"){
-            steps{
-                echo "Deployment"
             }
         }
     }
