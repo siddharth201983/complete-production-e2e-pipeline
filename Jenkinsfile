@@ -17,9 +17,14 @@ pipeline{
                 git branch: 'main', credentialsId: 'gitcred', url:"https://github.com/siddharth201983/complete-production-e2e-pipeline.git"  
             }
         }
-        stage("Create Build"){
+        stage("Build Application"){
             steps{
-                 echo "Create Build"
+                 sh 'mvn clean package'
+            }
+        }
+        stage("Test Application"){
+            steps{
+                 sh 'mvn test'
             }
         }
         stage("Push Image"){
