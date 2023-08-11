@@ -19,17 +19,17 @@ pipeline{
         }
         stage("Create Build"){
             steps{
-                 
+                 echo "Create Build"
             }
         }
         stage("Push Image"){
             steps{
-                 
+                 echo "Push Image"
             }
         }
         stage("Deployment"){
             steps{
-                 
+                 echo "Deployment"
             }
         }
     }
