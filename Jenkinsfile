@@ -19,22 +19,29 @@ pipeline{
         }
         stage("Build Application"){
             steps{
-                 sh 'mvn clean package'
+                sh 'mvn clean package'
             }
         }
         stage("Test Application"){
             steps{
-                 sh 'mvn test'
+                sh 'mvn test'
+            }
+        }
+        stage("SonarQube Analysis"){
+            steps{
+                withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                    sh 'mvn sonar:sonar'
+                }
             }
         }
         stage("Push Image"){
             steps{
-                 echo "Push Image"
+                echo "Push Image"
             }
         }
         stage("Deployment"){
             steps{
-                 echo "Deployment"
+                echo "Deployment"
             }
         }
     }
