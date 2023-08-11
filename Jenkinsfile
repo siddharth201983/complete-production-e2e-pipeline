@@ -7,28 +7,38 @@ pipeline{
         maven 'Maven3'
     }
     stages("Clean Workspace"){
-        steps{
-            cleanWs()
+        stage{
+            steps{
+                cleanWs()
+            }
         }
     }
     stages("Checkout from SCM"){
-        steps{
-           git branch: 'main', credentialsId: 'gitcred', url:"https://github.com/siddharth201983/complete-production-e2e-pipeline.git"  
+        stage{
+            steps{
+            git branch: 'main', credentialsId: 'gitcred', url:"https://github.com/siddharth201983/complete-production-e2e-pipeline.git"  
+            }
         }
     }
-    stages(){
-        steps{
-            echo "Create Build"
+    stages("Create Build"){
+        stage{
+            steps{
+                 
+            }
         }
     }
-    stages(){
-        steps{
-            echo "Push Image"
+    stages("Push Image"){
+        stage{
+            steps{
+                 
+            }
         }
     }
-    stages(){
-        steps{
-            echo "Deployment"
+    stages("Deployment"){
+        stage{
+            steps{
+                 
+            }
         }
     }
 }
