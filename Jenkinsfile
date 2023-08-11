@@ -6,6 +6,14 @@ pipeline{
         jdk 'Java17'
         maven 'Maven3'
     }
+    environment{
+        APP_NAME = "java-demoapp"
+        RELEASE = "1.0.0"
+        DOCKER_USER = "siddharth20"
+        DOCKER_PASS = "dockercred"
+        IMAGE_NAME = "${DOCKER_USER}/${APP_NAME}"
+        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+    }
     stages{
         stage("Clean Workspace"){
             steps{
@@ -40,6 +48,20 @@ pipeline{
             steps{
                 script{
                     waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonarqube-token'
+                }
+            }
+        }
+        stage("Build & Push Docker Image"){
+            steps{
+                script{
+                    docker.WithRegistry('', DOCKER_PASS) {
+                        docker_image = docker.build "${IMAGE_NAME}"
+                    }
+
+                    docker.WithRegistry('', DOCKER_PASS) {
+                        docker_image.push("${IMAGE_TAG}")
+                        docker_image.push("latest")
+                    }                    
                 }
             }
         }
